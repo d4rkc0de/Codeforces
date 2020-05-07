@@ -1,5 +1,6 @@
 import java.io.*;
-import java.util.*;
+import java.util.Objects;
+import java.util.StringTokenizer;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
@@ -12,73 +13,18 @@ public class Solution {
     static BufferedReader in;
     static PrintWriter out;
     static StringTokenizer tok;
-    static boolean isLocal = true;
+    static boolean isLocal = false;
 
-    int N = 10000;
-
-    void addToMap(Map<Integer, Set<String>> map, int q, String r) {
-        Set<String> set = map.get(q);
-        if (set == null) set = new HashSet<>();
-        set.add(r);
-        map.put(q, set);
-    }
-
-    void printMap(Map<Integer, Set<String>> map) {
-        for (int key : map.keySet()) {
-            out.print(key + ": ");
-            for (String x : map.get(key)) out.print(x + " ");
-            out.println();
-        }
-    }
-
-    private String getAndDelete(Map<Integer, Set<String>> map, int i) {
-        if (!map.containsKey(i)) return "#";
-        Set<String> set = map.get(i);
-        if (set == null || set.size() != 1) return "#";
-        String ans = (String) set.toArray()[0];
-        for (int j = i + 1; j <= 10; j++)
-            if (map.containsKey(j))
-                map.get(j).remove(ans);
-        return ans;
-    }
-
-    String CaseMissing(Set<Character> chars, String ans) {
-        for (char c : chars)
-            if (!ans.contains("" + c)) return "" + c;
-        return "#";
-    }
 
     void Case() throws IOException {
-        int u = nextInt();
-        int q[] = new int[N];
-        String[] r = new String[N];
-        Map<Integer, Set<String>> map = new TreeMap<>();
-        Set<Character> chars = new HashSet<>();
-        for (int i = 0; i < N; i++) {
-            q[i] = nextInt();
-            r[i] = next();
-            addToMap(map, q[i], r[i]);
-            for (char c : r[i].toCharArray()) chars.add(c);
-        }
-        printMap(map);
-        String ans = "";
-        for (int i = 0; i < 10; i++) {
-            ans += getAndDelete(map, i);
-        }
-        for (char c : ans.toCharArray())
-            if (c != '#')
-                out.print(c);
-            else
-                out.print(CaseMissing(chars, ans));
-        out.println();
-//        printMap(map);
+
     }
 
 
     void solve() throws Exception {
         int t = nextInt();
         for (int i = 1; i <= t; i++) {
-            out.print("Case #" + i + ": ");
+//            out.print("Case #" + i + ": ");
             Case();
         }
     }
